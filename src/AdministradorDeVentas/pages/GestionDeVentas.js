@@ -10,7 +10,7 @@ import { columnasVentas } from "./data/data";
 
 import { Button, Navbar, Nav, Container, Form, FormGroup, Modal, Row, Col } from 'react-bootstrap';
 
-const GestionDeVenta = () => {
+const GestionDeVentas = () => {
     const [ventas, setVentas] = useState([])
     const [isOpen, setIsOpen] = useState(false);
 
@@ -137,6 +137,4 @@ const GestionDeVenta = () => {
     );
 };
 
-
-
-export default GestionDeVenta;
+export default GestionDeVentas;

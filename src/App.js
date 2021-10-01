@@ -1,6 +1,5 @@
-import logo from './assets/images/logo.svg';
 import './assets/css/App.css';
-import{ 
+import {
   BrowserRouter as Router,
   Route,
   Switch,
@@ -13,24 +12,25 @@ import Roles from "./GestionDeUsuarios/pages/Roles"
 
 function App() {
   return (
-    <Router>
-      
-      <Switch>
-        <Route path="/" exact>
-          <Ingreso />
-        </Route>
-        <Route path="/AdministradorDeProductos" exact>
-          <GestionDeProducto />
+    <>
+      <Router>
+        <Switch>
+          <Route path="/" exact>
+            <Ingreso />
+          </Route>
+          <Route path="/AdministradorDeProductos" exact>
+            <GestionDeProducto />
           </Route>
           <Route path="/AdministradorDeVentas" exact>
-          <GestionDeVentas />
+            <GestionDeVentas />
           </Route>
           <Route path="/GestionDeUsuarios" exact>
-          <Roles />
-        </Route>
-        <Redirect to="/" />
-      </Switch>
-    </Router>
+            <Roles />
+          </Route>
+          <Redirect to="/" />
+        </Switch>
+      </Router>
+    </>
   );
 }
 
