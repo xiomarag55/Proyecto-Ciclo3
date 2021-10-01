@@ -64,21 +64,23 @@ const GestionDeVentas = () => {
     );
 
     const subHeaderComponentMemo = useMemo(() => {
-		const handleClear = () => {
-			if (filterText) {
-				//setResetPaginationToggle(!resetPaginationToggle);
-				setFilterText('');
-			}
-		};
+        const handleClear = () => {
+            if (filterText) {
+                //setResetPaginationToggle(!resetPaginationToggle);
+                setFilterText('');
+            }
+        };
 
-		return (
-			<FilterComponent onFilter={e => setFilterText(e.target.value)} onClear={handleClear} filterText={filterText} />
-		);
-	}, [filterText]);
+        return (
+            <FilterComponent onFilter={e => setFilterText(e.target.value)} onClear={handleClear} filterText={filterText} />
+        );
+    }, [filterText]);
 
     const filteredItems = ventas.filter(
-		item => item.comprador && item.comprador.toLowerCase().includes(filterText.toLowerCase()),
-	);
+        item => item.comprador && item.comprador.toLowerCase().includes(filterText.toLowerCase()),
+    );
+
+    const actionsMemo = useMemo(() => <Button onClick={open}><AddCircleOutline />Agregar Venta</Button>, []);
 
     return (
         <>
@@ -152,7 +154,6 @@ const GestionDeVentas = () => {
                                         name="vendedor"
                                         value={formulario.vendedor}
                                         onChange={handleChange} />
-                                    {/* <span hidden value={formulario.actions = `${<div><Button>Edit</Button><Button>Delete</Button></div>}`} /> */}
                                 </FormGroup>
                             </Modal.Body>
                             <Modal.Footer>
@@ -160,7 +161,6 @@ const GestionDeVentas = () => {
                                 <Button onClick={handleModal}>Cancelar</Button>
                             </Modal.Footer>
                         </Modal>
-                        <Button className="btn btn-primary me-md-2" size="lg" onClick={open}><AddCircleOutline />Agregar venta</Button>
 
                         <DataTable
                             columns={columnasVentas}
@@ -168,6 +168,7 @@ const GestionDeVentas = () => {
                             title="Gestor de Ventas"
                             subHeader
                             subHeaderComponent={subHeaderComponentMemo}
+                            actions={actionsMemo}
                         />
                     </Col>
                 </Row>
