@@ -1,9 +1,12 @@
-const GestionDeVenta = () => {
+import { Button, Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
+
+const GestionDeVentas = () => {
     return(
-        <h1> Aqui iria la tabla de ventas</h1>
+    
+        <h1>ventas</h1>
          )
 };
 
 
 
-export default GestionDeVenta;
+export default GestionDeVentas;

@@ -1,5 +1,7 @@
 import logo from './assets/images/logo.svg';
-import './assets/css/App.css';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import{ 
   BrowserRouter as Router,
   Route,
@@ -7,26 +9,27 @@ import{
   Redirect,
 } from "react-router-dom";
 import Ingreso from "./GestionDeIngreso/pages/Ingreso"
-import GestionDeProducto from "./AdministradorDeProductos/pages/GestionDeProducto"
+import GestionDeProductos from "./AdministradorDeProductos/pages/GestionDeProductos"
 import GestionDeVentas from "./AdministradorDeVentas/pages/GestionDeVentas"
-import Roles from "./GestionDeUsuarios/pages/Roles"
+import GestionDeUsuarios from "./GestionDeUsuarios/pages/GestionDeUsuarios"
+import Header from './Shared/Header';
 
 function App() {
   return (
     <Router>
-      
+      <Header/>
       <Switch>
         <Route path="/" exact>
           <Ingreso />
         </Route>
-        <Route path="/AdministradorDeProductos" exact>
-          <GestionDeProducto />
+        <Route path="/administradordeproductos" exact>
+          <GestionDeProductos />
           </Route>
-          <Route path="/AdministradorDeVentas" exact>
+          <Route path="/administradordeventas" exact>
           <GestionDeVentas />
           </Route>
-          <Route path="/GestionDeUsuarios" exact>
-          <Roles />
+          <Route path="/gestiondeusuarios" exact>
+          <GestionDeUsuarios />
         </Route>
         <Redirect to="/" />
       </Switch>
