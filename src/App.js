@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 import logo from './assets/images/logo.svg';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import{ 
+=======
+import './assets/css/App.css';
+import {
+>>>>>>> 7f97e58589f3fe9fc19a6e4b13435283cd4501f1
   BrowserRouter as Router,
   Route,
   Switch,
@@ -16,6 +21,7 @@ import Header from './Shared/Header';
 
 function App() {
   return (
+<<<<<<< HEAD
     <Router>
       <Header/>
       <Switch>
@@ -34,6 +40,27 @@ function App() {
         <Redirect to="/" />
       </Switch>
     </Router>
+=======
+    <>
+      <Router>
+        <Switch>
+          <Route path="/" exact>
+            <Ingreso />
+          </Route>
+          <Route path="/AdministradorDeProductos" exact>
+            <GestionDeProducto />
+          </Route>
+          <Route path="/AdministradorDeVentas" exact>
+            <GestionDeVentas />
+          </Route>
+          <Route path="/GestionDeUsuarios" exact>
+            <Roles />
+          </Route>
+          <Redirect to="/" />
+        </Switch>
+      </Router>
+    </>
+>>>>>>> 7f97e58589f3fe9fc19a6e4b13435283cd4501f1
   );
 }
 
