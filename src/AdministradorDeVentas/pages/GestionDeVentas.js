@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import useFormulario from "./hooks/useFormulario";
 
 import './assets/css/ventas.css';
@@ -9,10 +9,13 @@ import DataTable from "react-data-table-component";
 import { columnasVentas } from "./data/data";
 
 import { Button, Navbar, Nav, Container, Form, FormGroup, Modal, Row, Col } from 'react-bootstrap';
+import { TextField } from "@material-ui/core";
 
 const GestionDeVentas = () => {
     const [ventas, setVentas] = useState([])
     const [isOpen, setIsOpen] = useState(false);
+
+    const [filterText, setFilterText] = useState('');
 
     const [formulario, handleChange, reset] = useFormulario({
         id: '',
@@ -43,6 +46,40 @@ const GestionDeVentas = () => {
     const handleModal = () => {
         setIsOpen(false)
     }
+
+    const FilterComponent = ({ filterText, onFilter, onClear }) => (
+        <>
+            <input
+                id="search"
+                type="text"
+                placeholder="Filter By Name"
+                aria-label="Search Input"
+                value={filterText}
+                onChange={onFilter}
+            />
+            <button type="button" onClick={onClear}>
+                X
+            </button>
+        </>
+    );
+
+    const subHeaderComponentMemo = useMemo(() => {
+		const handleClear = () => {
+			if (filterText) {
+				//setResetPaginationToggle(!resetPaginationToggle);
+				setFilterText('');
+			}
+		};
+
+		return (
+			<FilterComponent onFilter={e => setFilterText(e.target.value)} onClear={handleClear} filterText={filterText} />
+		);
+	}, [filterText]);
+
+    const filteredItems = ventas.filter(
+		item => item.comprador && item.comprador.toLowerCase().includes(filterText.toLowerCase()),
+	);
+
     return (
         <>
             <Navbar className="Navbar">
@@ -127,8 +164,10 @@ const GestionDeVentas = () => {
 
                         <DataTable
                             columns={columnasVentas}
-                            data={ventas}
+                            data={filteredItems}
                             title="Gestor de Ventas"
+                            subHeader
+                            subHeaderComponent={subHeaderComponentMemo}
                         />
                     </Col>
                 </Row>
