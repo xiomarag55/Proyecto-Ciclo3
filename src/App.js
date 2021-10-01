@@ -13,7 +13,7 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import Ingreso from "./GestionDeIngreso/pages/Ingreso"
+import Login from "./GestionDeIngreso/pages/login/Login"
 import GestionDeProductos from "./AdministradorDeProductos/pages/GestionDeProductos"
 import GestionDeVentas from "./AdministradorDeVentas/pages/GestionDeVentas"
 import GestionDeUsuarios from "./GestionDeUsuarios/pages/GestionDeUsuarios"
@@ -26,7 +26,7 @@ function App() {
       <Header/>
       <Switch>
         <Route path="/" exact>
-          <Ingreso />
+          <Login />
         </Route>
         <Route path="/administradordeproductos" exact>
           <GestionDeProductos />
@@ -45,7 +45,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/" exact>
-            <Ingreso />
+            <Login />
           </Route>
           <Route path="/AdministradorDeProductos" exact>
             <GestionDeProducto />
