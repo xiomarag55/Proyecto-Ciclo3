@@ -1,4 +1,7 @@
+
+
 import { useState, useMemo } from "react"
+
 import useFormulario from "./hooks/useFormulario";
 
 import './assets/css/ventas.css';
@@ -14,6 +17,7 @@ import { TextField } from "@material-ui/core";
 const GestionDeVentas = () => {
     const [ventas, setVentas] = useState([])
     const [isOpen, setIsOpen] = useState(false);
+
 
     const [filterText, setFilterText] = useState('');
 
