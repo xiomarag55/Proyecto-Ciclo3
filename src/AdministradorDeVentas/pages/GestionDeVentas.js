@@ -1,23 +1,18 @@
-
-
 import { useState, useMemo } from "react"
 
-import useFormulario from "./hooks/useFormulario";
+import useFormulario from "../../Shared/hooks/useFormulario";
 
-import './assets/css/ventas.css';
-import AddCircleOutline from '@material-ui/icons/AddCircleOutline';
-
+import { Button, Container, Form, FormGroup, Modal, Row, Col } from 'react-bootstrap';
 import DataTable from "react-data-table-component";
 
-import { columnasVentas } from "./data/data";
+import '../assets/css/ventas.css';
+import AddCircleOutline from '@material-ui/icons/AddCircleOutline';
 
-import { Button, Navbar, Nav, Container, Form, FormGroup, Modal, Row, Col } from 'react-bootstrap';
-import { TextField } from "@material-ui/core";
+import { columnasVentas } from "../data/data";
 
 const GestionDeVentas = () => {
     const [ventas, setVentas] = useState([])
     const [isOpen, setIsOpen] = useState(false);
-
 
     const [filterText, setFilterText] = useState('');
 
@@ -70,7 +65,6 @@ const GestionDeVentas = () => {
     const subHeaderComponentMemo = useMemo(() => {
         const handleClear = () => {
             if (filterText) {
-                //setResetPaginationToggle(!resetPaginationToggle);
                 setFilterText('');
             }
         };
@@ -88,23 +82,6 @@ const GestionDeVentas = () => {
 
     return (
         <>
-            <Navbar className="Navbar">
-                <Container fluid>
-                    <Navbar.Brand className="text-white" href="#">ChocoApp</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="navbarScroll" />
-                    <Navbar.Collapse id="navbarScroll">
-                        <Nav className="me-auto my-2 my-lg-0">
-                            <Nav.Link className="text-white" href="#action1">Home</Nav.Link>
-                            <Nav.Link className="text-white" href="#action2">Productos</Nav.Link>
-                            <Nav.Link className="text-white" href="#" >
-                                Usuarios
-                            </Nav.Link>
-                        </Nav>
-                        <Button variant="outline-info">Logout</Button>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-
             <Container>
                 <Row className="d-flex justify-content-center align-items-center">
                     <Col xs={20}>

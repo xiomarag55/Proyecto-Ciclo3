@@ -15,4 +15,4 @@ const useFormulario = (inicial) => {
     return [formulario, handleChange, reset]
 }
 
-export default useFormulario
+export default useFormulario;
