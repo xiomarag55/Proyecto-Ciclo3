@@ -8,8 +8,7 @@ function loginForm(){
         <form>
             <div className='logoApp'>
              <img src={ChocoApp}  />
-            </div>
-                       
+            </div>       
             <div className='form-inner'>
                 <div className='logoapp'>
                     <img src={log}  />
@@ -29,7 +28,6 @@ function loginForm(){
                 <h4></h4>              
                 <Button variant="primary" id='sig'>Ingresar</Button>{' '}
                 <Button variant="secondary" id='can'>Crear cuenta</Button>{' '}  
-                
             </div>
         </form>
     )

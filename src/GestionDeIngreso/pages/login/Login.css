@@ -6,7 +6,7 @@ body{
 }  
 
 .form-inner{
-    width: 300px;
+    width: 450px;
     overflow: hidden; 
     margin: auto;  
     padding: 60px;  
@@ -44,7 +44,7 @@ label{
 }
 
 #email{  
-    width: 292px;  
+    width: 298px;  
     height: 28px;  
     border: none;
     border-radius: 5px;  
@@ -52,7 +52,7 @@ label{
     
 }
 #password{  
-    width: 292px;  
+    width: 298px;  
     height: 28px;  
     border: none; 
     border-radius: 5px;  
@@ -62,7 +62,7 @@ label{
 } 
 #sig{  
     width: 148px;  
-    height: 28px;  
+    height: 32px;  
     border: blueviolet;  
     border-radius: 7px;  
     padding-left: 7px; 
@@ -72,7 +72,7 @@ label{
 } 
 #can{ 
     width: 148px;  
-    height: 28px;  
+    height: 32px;  
     border: none;  
     border-radius: 7px;  
     padding-left: 7px;
