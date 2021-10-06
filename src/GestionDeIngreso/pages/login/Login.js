@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button'
 import ChocoApp from './ChocoApp.png'
 import log from './log.png'
 import './Login.css'
-function loginForm(){
+const loginForm=()=>{
     return(
         <form>
             <div className='logoApp'>
@@ -13,21 +13,19 @@ function loginForm(){
                 <div className='logoapp'>
                     <img src={log}  />
                 </div>
-                <h1></h1>
                 <div className='form-group'>
-                    <label htmlFor='email'> E-mail  </label>
-                    <br/> 
-                    <input type='email' name='email' id='email' placeholder='Ingrese su correo electronico'/>
+                    <label htmlFor='label'> E-mail  </label>
+                    <input classname="input" type='email' placeholder='Ingrese su correo electrónico'/>
                 </div>
-                <h3> </h3>
                 <div className='form-group'>
-                    <label htmlFor='password'> Contraseña</label>
-                    <input type='password' name='password' id='password' 
-                    placeholder='Ingrese su contraseña'/>
-                </div>  
-                <h4></h4>              
-                <Button variant="primary" id='sig'>Ingresar</Button>{' '}
-                <Button variant="secondary" id='can'>Crear cuenta</Button>{' '}  
+                    <label htmlFor='label'> Contraseña</label>
+                    <input className="input" type='password' placeholder='Ingrese su contraseña'/>
+                </div>              
+                <div className="form-group">
+                <label htmlFor='label'></label>
+                <Button variant="primary" type="button">Ingresar</Button>{' '}
+                <Button variant="primary" type="button">Crear cuenta</Button>{' '} 
+                </div> 
             </div>
         </form>
     )
