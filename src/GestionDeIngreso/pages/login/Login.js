@@ -23,8 +23,8 @@ const loginForm=()=>{
                 </div>              
                 <div className="form-group">
                 <label htmlFor='label'></label>
-                <Button variant="primary" type="button">Ingresar</Button>{' '}
-                <Button variant="primary" type="button">Crear cuenta</Button>{' '} 
+                <button type="button" id="ingresar" class="btn btn-outline-primary">Ingresar</button>
+                <button type="button" id="crearCuenta" class="btn btn-outline-primary">Crear Cuenta</button>
                 </div> 
             </div>
         </form>
