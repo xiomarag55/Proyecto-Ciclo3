@@ -10,7 +10,7 @@ const GestionDeUsuarios = () => {
       {/* <NavComponent /> */}
       <Card>
         <Card.Body  >
-          <ModalComponent />
+          {/* <ModalComponent /> */}
           <DataTableComponent />
         </Card.Body>
       </Card>
