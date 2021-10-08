@@ -36,3 +36,14 @@ exports.updateProduct = async (req, res) => {
     }
 
   };
+  exports.deleteProduct = async (req, res) => {
+    try {
+      const producto = await Producto.findById(req.params.id);
+      await producto.remove();
+      res.send({ data: true});
+      producto.save();
+    } catch {
+        res.status(404).send({ error: "No se encuentra el producto"});
+  
+      } 
+  }
