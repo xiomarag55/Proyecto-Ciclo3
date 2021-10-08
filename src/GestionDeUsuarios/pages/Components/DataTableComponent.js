@@ -17,6 +17,8 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import callApi from '../api';
+import { useEffect } from 'react';
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -38,94 +40,6 @@ const tableIcons = {
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
 };
 
-// const columns = [
-//     {
-//         title: "Identificación",
-//         field: "identification"
-//     },
-//     {
-//         title: "Nombre",
-//         field: "name"
-//     },
-//     {
-//         title: "Rol",
-//         field: "role"
-//     },
-//     {
-//         title: "Estado",
-//         field: "status"
-//     },
-// ];
-
-// const data = [
-//     {
-//         id: 1,
-//         identification: '123456',
-//         name: 'Einer',
-//         role: 'Vendedor',
-//         status: 'Pendiente',
-//     },
-//     {
-//         identification: '851222',
-//         id: 2,
-//         name: 'Jimmy',
-//         role: 'Vendedor',
-//         status: 'autorizado',
-//     },
-//     {
-//         identification: '576867',
-//         id: 3,
-//         name: 'Karen B',
-//         role: 'Administrador',
-//         status: 'no autorizado',
-//     },
-//     {
-//         identification: '879768',
-//         id: 4,
-//         name: 'Xiomara',
-//         role: 'Vendedor',
-//         status: 'autorizado',
-//     },
-//     {
-//         identification: '687678',
-//         id: 5,
-//         name: 'Jhon',
-//         role: 'Administrador',
-//         status: 'Pendiente',
-//     },
-// ]
-
-// function DataTableComponent() {
-//     return (
-//         <MaterialTable
-//             icons={tableIcons}
-//             columns={columns}
-//             data={data}
-//             title="Lista de Usuarios"
-
-//             actions={[
-//                 {
-//                     icon: tableIcons.Edit,
-//                     tooltip: "Editar Usuario",
-//                     onClick: (event, RowData) => alert('Deseas Editar al usuario: ' + RowData.name)
-//                 },
-//                 {
-//                     icon: tableIcons.Delete,
-//                     tooltip: "Eliminar Usuario",
-//                     onClick: (event, RowData) => alert('Deseas Eliminar al usuario: ' + RowData.name)
-//                 },
-//             ]
-
-//             }
-//             options={{
-//                 actionsColumnIndex: -1,
-//                 headerStyle: { fontSize: 20 }
-//             }
-//             }
-//         />
-//     );
-// }
-// export default DataTableComponent;
 function DataTableComponent(props) {
     const { useState } = React;
     const [columns, setColumns] = useState([
@@ -143,22 +57,26 @@ function DataTableComponent(props) {
         {
             title: 'Rol',
             field: 'role',
-            lookup: { 1: 'Administrador', 2: 'Vendedor' },
+            lookup: { "administrador": 'Administrador', "vendedor": 'Vendedor' },
         },
         {
             title: 'Estado',
             field: 'status',
-            lookup: { 1: 'Autorizado', 2: 'No autorizado', 3: 'Pendiente' },
+            lookup: { "autorizado": 'Autorizado', "no_autorizado": 'No autorizado', "pendiente": 'Pendiente' },
         },
     ]);
 
-    const [data, setData] = useState([
-        { identification: '123456', name: 'Einer', role: 2, status: 3 },
-        { identification: '123456', name: 'Jimmy', role: 2, status: 1 },
-        { identification: '123456', name: 'Karen B', role: 1, status: 2 },
-        { identification: '123456', name: 'Xiomara', role: 2, status: 1 },
-        { identification: '123456', name: 'Jhon', role: 1, status: 3 },
-    ]);
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+
+        async function fetchData() {
+            const response = await callApi();
+            setData(response);
+        }
+        fetchData();
+    }, []);
+
 
     return (
         <MaterialTable
@@ -196,11 +114,28 @@ function DataTableComponent(props) {
             editable={{
                 onRowAdd: newData =>
                     new Promise((resolve, reject) => {
-                        setTimeout(() => {
-                            setData([...data, newData]);
+                        async function postData(url = '', dataALL = { newData }) {
+                            const response = await fetch(url, {
+                                method: 'POST',
+                                mode: 'cors',
+                                cache: 'no-cache',
+                                credentials: 'same-origin',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                redirect: 'follow',
+                                referrerPolicy: 'no-referrer',
+                                body: JSON.stringify(newData)
+                            });
+                            return response.json();
+                        }
 
-                            resolve();
-                        }, 1000)
+                        postData('http://localhost:3002/api/users')
+                            .then(dataALL => {
+                                console.log(dataALL);
+                                setData([...data, newData]);
+                                resolve();
+                            });
                     }),
                 onRowUpdate: (newData, oldData) =>
                     new Promise((resolve, reject) => {
