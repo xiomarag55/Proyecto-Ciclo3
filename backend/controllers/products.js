@@ -47,3 +47,12 @@ exports.updateProduct = async (req, res) => {
   
       } 
   }
+  exports.getProductId = (req, res) => {
+    Producto.findById(req.params.id).then((productoResult) => {
+      if (productoResult) {
+        res.status(200).json(productoResult);
+      } else {
+        res.status(404).json("Producto no encontrado");
+      }
+    });
+  };
