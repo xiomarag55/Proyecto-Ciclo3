@@ -23,3 +23,16 @@ exports.addProduct = (req, res) => {
     res.status(201).json("Creado satisfactoriamente");
   });
 };
+
+exports.updateProduct = async (req, res) => {
+  try {
+    const producto = await Producto.findById(req.params.id);
+    Object.assign(producto, req.body);
+    res.send({ data: producto});
+    producto.save();
+  } catch {
+      res.status(404).send({ error: "No se encuentra el producto"});
+
+    }
+
+  };
