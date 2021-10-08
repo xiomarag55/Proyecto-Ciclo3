@@ -36,7 +36,7 @@ exports.deleteUser=(req,res)=>{
             });  
     }
     return res.status(500).send({
-        message: "No se pudo eliminar el usuario con ID " + req.params.userId
+        message: "No se pudo eliminar el usuario con ID " + req.params.usuarioId
 
     });
 
