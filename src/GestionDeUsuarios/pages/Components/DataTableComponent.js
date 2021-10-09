@@ -44,10 +44,13 @@ function DataTableComponent(props) {
     const { useState } = React;
     const [columns, setColumns] = useState([
         {
+            title: 'ID', field: '_id', hidden: true,
+        },
+        {
             title: 'Identificacion', field: 'identification',
             editComponent: props => (
                 <input
-                    type="text"
+                    type="number"
                     value={props.value}
                     onChange={e => props.onChange(e.target.value)}
                 />
@@ -139,25 +142,58 @@ function DataTableComponent(props) {
                     }),
                 onRowUpdate: (newData, oldData) =>
                     new Promise((resolve, reject) => {
-                        setTimeout(() => {
-                            const dataUpdate = [...data];
-                            const index = oldData.tableData.id;
-                            dataUpdate[index] = newData;
-                            setData([...dataUpdate]);
-
-                            resolve();
-                        }, 1000)
+                        async function postData(url = '', dataALL = { newData }) {
+                            const response = await fetch(url, {
+                                method: 'PUT',
+                                mode: 'cors',
+                                cache: 'no-cache',
+                                credentials: 'same-origin',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                redirect: 'follow',
+                                referrerPolicy: 'no-referrer',
+                                body: JSON.stringify(newData)
+                            });
+                            return response.json();
+                        }
+                        postData('http://localhost:3002/api/users/' + newData._id)
+                            .then(dataALL => {
+                                console.log(dataALL);
+                                const dataUpdate = [...data];
+                                const index = oldData.tableData.id;
+                                dataUpdate[index] = newData;
+                                setData([...dataUpdate]);
+                                resolve();
+                            });
                     }),
                 onRowDelete: oldData =>
                     new Promise((resolve, reject) => {
-                        setTimeout(() => {
-                            const dataDelete = [...data];
-                            const index = oldData.tableData.id;
-                            dataDelete.splice(index, 1);
-                            setData([...dataDelete]);
+                        async function postData(url = '', dataALL = { oldData }) {
+                            const response = await fetch(url, {
+                                method: 'DELETE',
+                                mode: 'cors',
+                                cache: 'no-cache',
+                                credentials: 'same-origin',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                redirect: 'follow',
+                                referrerPolicy: 'no-referrer',
 
-                            resolve();
-                        }, 1000)
+                            });
+                            return response.json();
+                        }
+                        postData('http://localhost:3002/api/users/' + oldData._id)
+                            .then(dataALL => {
+                                console.log(dataALL);
+                                const dataDelete = [...data];
+                                const index = oldData.tableData.id;
+                                dataDelete.splice(index, 1);
+                                setData([...dataDelete]);
+
+                                resolve();
+                            });
                     }),
             }}
         />
