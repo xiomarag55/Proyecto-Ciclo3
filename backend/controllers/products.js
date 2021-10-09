@@ -7,7 +7,7 @@ exports.getProducts = (req, res) => {
 };
 
 exports.addProduct = (req, res) => {
-  console.log('ola');
+  console.log('Hola');
   const productoAdd = new Producto({
     producto: req.body.producto,
     unidades: req.body.unidades,
