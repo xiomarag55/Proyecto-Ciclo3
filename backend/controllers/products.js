@@ -1,4 +1,4 @@
-const Producto = require("../models/productos");
+const Producto = require("../Models/productos");
 
 exports.getProducts = (req, res) => {
   Producto.find().then((productoResult) => {
@@ -12,7 +12,7 @@ exports.addProduct = (req, res) => {
     producto: req.body.producto,
     unidades: req.body.unidades,
     precioUnitario: req.body.precioUnitario,
-    valorTotal: req.body.precioUnitario,
+    valorTotal: req.body.valorTotal,
     fecha: req.body.fecha,
     estado: req.body.estado,
 

@@ -153,7 +153,7 @@ function GestionDeProductos(props) {
                             });
                             return response.json();
                         }
-                        postData('http://localhost:3002/api/products' + newData._id)
+                        postData('http://localhost:3002/api/products/' + newData._id)
                             .then(dataALL => {
                                 console.log(dataALL);
                                 const dataUpdate = [...data];
@@ -180,7 +180,7 @@ function GestionDeProductos(props) {
                             });
                             return response.json();
                         }
-                        postData('http://localhost:3002/api/products' + oldData._id)
+                        postData('http://localhost:3002/api/products/' + oldData._id)
                             .then(dataALL => {
                                 console.log(dataALL);
                                 const dataDelete = [...data];

@@ -64,6 +64,7 @@ function GestionDeVentas(props) {
             title: 'Precio Unitario',
             field: 'precioUnitario',
             
+            
         },
         
         {
