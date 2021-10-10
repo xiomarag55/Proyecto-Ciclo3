@@ -41,7 +41,6 @@ const GestionDeProductos = () => {
     }
 
     const handleModal = () => {
-        setIsOpen(false)
     }
 
     const FilterComponent = ({ filterText, onFilter, onClear }) => (

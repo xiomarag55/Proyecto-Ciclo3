@@ -15,7 +15,9 @@ exports.addSale = (req, res) => {
     fecha: req.body.fecha,
     identificacion: req.body.identificacion,
     comprador: req.body.comprador,
-    vendedor: req.body.vendedor,
+    vendedor: req.body.vendedor, 
+    registro: req.body.registro,
+    detalles: req.body.detalles,
 
   });
 

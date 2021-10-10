@@ -1,161 +1,222 @@
-import { useState, useMemo } from "react"
+import MaterialTable from 'material-table';
+import React from 'react';
+import { forwardRef } from 'react';
+import AddBox from '@material-ui/icons/AddBox';
+import ArrowUpward from '@material-ui/icons/ArrowUpward';
+import Check from '@material-ui/icons/Check';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import ChevronRight from '@material-ui/icons/ChevronRight';
+import Clear from '@material-ui/icons/Clear';
+import DeleteOutline from '@material-ui/icons/DeleteOutline';
+import Edit from '@material-ui/icons/Edit';
+import FilterList from '@material-ui/icons/FilterList';
+import FirstPage from '@material-ui/icons/FirstPage';
+import LastPage from '@material-ui/icons/LastPage';
+import Remove from '@material-ui/icons/Remove';
+import SaveAlt from '@material-ui/icons/SaveAlt';
+import Search from '@material-ui/icons/Search';
+import ViewColumn from '@material-ui/icons/ViewColumn';
+import callApi from '../api';
+import { useEffect } from 'react';
 
-import useFormulario from "../../Shared/hooks/useFormulario";
-
-import { Button, Container, Form, FormGroup, Modal, Row, Col } from 'react-bootstrap';
-import DataTable from "react-data-table-component";
-
-import '../assets/css/ventas.css';
-import AddCircleOutline from '@material-ui/icons/AddCircleOutline';
-
-import { columnasVentas } from "../data/data";
-
-const GestionDeVentas = () => {
-    const [ventas, setVentas] = useState([])
-    const [isOpen, setIsOpen] = useState(false);
-
-    const [filterText, setFilterText] = useState('');
-
-    const [formulario, handleChange, reset] = useFormulario({
-        id: '',
-        producto: '',
-        unidades: '',
-        precioUnitario: '',
-        valorTotal: '',
-        fecha: '',
-        identificacion: '',
-        comprador: '',
-        vendedor: ''
-    })
-
-    const submit = e => {
-        e.preventDefault()
-        setVentas([
-            ...ventas,
-            formulario
-        ])
-        reset()
-    }
-
-    const open = e => {
-        e.preventDefault()
-        setIsOpen(!isOpen)
-    }
-
-    const handleModal = () => {
-        setIsOpen(false)
-    }
-
-    const FilterComponent = ({ filterText, onFilter, onClear }) => (
-        <>
-            <input
-                id="search"
-                type="text"
-                placeholder="Filter By Name"
-                aria-label="Search Input"
-                value={filterText}
-                onChange={onFilter}
-            />
-            <button type="button" onClick={onClear}>
-                X
-            </button>
-        </>
-    );
-
-    const subHeaderComponentMemo = useMemo(() => {
-        const handleClear = () => {
-            if (filterText) {
-                setFilterText('');
-            }
-        };
-
-        return (
-            <FilterComponent onFilter={e => setFilterText(e.target.value)} onClear={handleClear} filterText={filterText} />
-        );
-    }, [filterText]);
-
-    const filteredItems = ventas.filter(
-        item => item.comprador && item.comprador.toLowerCase().includes(filterText.toLowerCase()),
-    );
-
-    const actionsMemo = useMemo(() => <Button onClick={open}><AddCircleOutline />Agregar Venta</Button>, []);
-
-    return (
-        <>
-            <Container>
-                <Row className="d-flex justify-content-center align-items-center">
-                    <Col xs={20}>
-                        <Modal show={isOpen} onHide={handleModal}>
-                            <Modal.Header closeButton>
-                                Agregue la venta
-                            </Modal.Header>
-                            <Modal.Body>
-                                <FormGroup>
-                                    <span hidden name="fecha" value={formulario.fecha = new Date().toDateString()} />
-                                    <span name="id" value={formulario.id = ventas.length + 1} />
-                                    <Form.Label >Nombre del comprador:</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        name="comprador"
-                                        value={formulario.comprador}
-                                        onChange={handleChange} />
-                                    <Form.Label >Documento de identificación:</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        name="identificacion"
-                                        value={formulario.identificacion}
-                                        onChange={handleChange} />
-                                    <Form.Label >Producto:</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        name="producto"
-                                        value={formulario.producto}
-                                        onChange={handleChange} />
-                                    <Form.Label >Unidades:</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        name="unidades"
-                                        value={formulario.unidades}
-                                        onChange={handleChange} />
-                                    <Form.Label >Precio unitario:</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        name="precioUnitario"
-                                        value={formulario.precioUnitario}
-                                        onChange={handleChange} />
-                                    <Form.Label >Valor total:</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        name="valorTotal"
-                                        value={formulario.valorTotal = formulario.unidades * formulario.precioUnitario}
-                                        onChange={handleChange} />
-                                    <Form.Label >Vendedor:</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        name="vendedor"
-                                        value={formulario.vendedor}
-                                        onChange={handleChange} />
-                                </FormGroup>
-                            </Modal.Body>
-                            <Modal.Footer>
-                                <Button onClick={submit}>Aceptar</Button>
-                                <Button onClick={handleModal}>Cancelar</Button>
-                            </Modal.Footer>
-                        </Modal>
-
-                        <DataTable
-                            columns={columnasVentas}
-                            data={filteredItems}
-                            title="Gestor de Ventas"
-                            subHeader
-                            subHeaderComponent={subHeaderComponentMemo}
-                            actions={actionsMemo}
-                        />
-                    </Col>
-                </Row>
-            </Container>
-        </>
-    );
+const tableIcons = {
+    Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
+    Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
+    Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+    Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
+    DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+    Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+    Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+    Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
+    FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+    LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+    NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+    PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
+    ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+    Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+    SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref} />),
+    ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
+    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
 };
 
+function GestionDeVentas(props) {
+    const { useState } = React;
+    const [columns, setColumns] = useState([
+        {
+            title: 'ID', field: '_id', hidden: true,
+        },
+        {
+            title: 'Número de Registro', field: 'registro'
+        },
+        {
+            title: 'Fecha de venta', field: 'fecha',
+            
+            
+        },
+        { title: 'Detalles', field: 'detalles' },
+        {
+            title: 'Unidades',
+            field: 'unidades',
+            
+        },
+
+        {
+            title: 'Precio Unitario',
+            field: 'precioUnitario',
+            
+        },
+        
+        {
+            title: 'Valor Total',
+            field: 'valorTotal',
+            
+        },
+       
+        {
+            title: 'Identificación',
+            field: 'identificacion',
+            
+        },
+        {
+            title: 'Comprador',
+            field: 'comprador',
+            
+        },
+        {
+            title: 'Vendedor',
+            field: 'vendedor',
+            
+        },
+    ]);
+
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+
+        async function fetchData() {
+            const response = await callApi();
+            setData(response);
+        }
+        fetchData();
+    }, []);
+
+
+    return (
+        <MaterialTable
+            title="Ventas"
+            columns={columns}
+            data={data}
+            icons={tableIcons}
+            options={{ actionsColumnIndex: -1 }}
+            localization={{
+                pagination: {
+                    labelRowsSelect: 'filas',
+                },
+                toolbar: {
+                    searchTooltip: 'Buscar',
+                    searchPlaceholder: 'Buscar',
+                },
+                header: {
+                    actions: 'Acciones'
+                },
+                body: {
+                    addTooltip: 'Agregar Venta',
+                    deleteTooltip: 'Eliminar Venta',
+                    editTooltip: 'Editar Venta',
+                    editRow: {
+                        deleteText: '¿Estás seguro de eliminar está venta?',
+                        cancelTooltip: 'Cancelar',
+                        saveTooltip: 'Guardar'
+                    },
+                    emptyDataSourceMessage: 'No hay registros que mostrar.',
+                    filterRow: {
+                        filterTooltip: 'Filter'
+                    }
+                }
+            }}
+            editable={{
+                onRowAdd: newData =>
+                    new Promise((resolve, reject) => {
+                        async function postData(url = '', dataALL = { newData }) {
+                            const response = await fetch(url, {
+                                method: 'POST',
+                                mode: 'cors',
+                                cache: 'no-cache',
+                                credentials: 'same-origin',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                redirect: 'follow',
+                                referrerPolicy: 'no-referrer',
+                                body: JSON.stringify(newData)
+                            });
+                            return response.json();
+                        }
+
+                        postData('http://localhost:3002/api/sales')
+                            .then(dataALL => {
+                                console.log(dataALL);
+                                setData([...data, newData]);
+                                resolve();
+                            });
+                    }),
+                onRowUpdate: (newData, oldData) =>
+                    new Promise((resolve, reject) => {
+                        async function postData(url = '', dataALL = { newData }) {
+                            const response = await fetch(url, {
+                                method: 'PUT',
+                                mode: 'cors',
+                                cache: 'no-cache',
+                                credentials: 'same-origin',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                redirect: 'follow',
+                                referrerPolicy: 'no-referrer',
+                                body: JSON.stringify(newData)
+                            });
+                            return response.json();
+                        }
+                        postData('http://localhost:3002/api/sales/' + newData._id)
+                            .then(dataALL => {
+                                console.log(dataALL);
+                                const dataUpdate = [...data];
+                                const index = oldData.tableData.id;
+                                dataUpdate[index] = newData;
+                                setData([...dataUpdate]);
+                                resolve();
+                            });
+                    }),
+                onRowDelete: oldData =>
+                    new Promise((resolve, reject) => {
+                        async function postData(url = '', dataALL = { oldData }) {
+                            const response = await fetch(url, {
+                                method: 'DELETE',
+                                mode: 'cors',
+                                cache: 'no-cache',
+                                credentials: 'same-origin',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                redirect: 'follow',
+                                referrerPolicy: 'no-referrer',
+
+                            });
+                            return response.json();
+                        }
+                        postData('http://localhost:3002/api/sales/' + oldData._id)
+                            .then(dataALL => {
+                                console.log(dataALL);
+                                const dataDelete = [...data];
+                                const index = oldData.tableData.id;
+                                dataDelete.splice(index, 1);
+                                setData([...dataDelete]);
+
+                                resolve();
+                            });
+                    }),
+            }}
+        />
+    )
+}
 export default GestionDeVentas;
