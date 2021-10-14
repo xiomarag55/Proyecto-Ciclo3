@@ -15,16 +15,16 @@ exports.addSale = (req, res) => {
     fecha: req.body.fecha,
     identificacion: req.body.identificacion,
     comprador: req.body.comprador,
-    vendedor: req.body.vendedor, 
+    vendedor: req.body.vendedor,
     registro: req.body.registro,
     detalles: req.body.detalles,
 
   });
 
-    ventaAdd.save().then((createdSale) => {
+  ventaAdd.save().then((createdSale) => {
     console.log(createdSale);
     res.status(201).json("Creado satisfactoriamente");
-    });
+  });
 };
 
 exports.updateSale = async (req, res) => {
@@ -33,9 +33,9 @@ exports.updateSale = async (req, res) => {
     Object.assign(venta, req.body);
     res.send({ data: venta });
     venta.save();
-} catch {
+  } catch {
     res.status(404).send({ error: "No se encuentra la venta" });
-    }
+  }
 };
 
 exports.deleteSale = async (req, res) => {
@@ -44,7 +44,7 @@ exports.deleteSale = async (req, res) => {
     await venta.remove();
     res.send({ data: true });
     venta.save();
-} catch {
+  } catch {
     res.status(404).send({ error: "No se encuentra la venta" });
   }
 };
@@ -56,5 +56,5 @@ exports.getSaleId = (req, res) => {
     } else {
       res.status(404).json("Venta no encontrada");
     }
-    });
+  });
 };

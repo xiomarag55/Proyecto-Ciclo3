@@ -40,59 +40,20 @@ const tableIcons = {
 };
 
 function GestionDeVentas(props) {
+
     const { useState } = React;
-    const [columns, setColumns] = useState([
-        {
-            title: 'ID', field: '_id', hidden: true,
-        },
-        {
-            title: 'Número de Registro', field: 'registro'
-        },
-        {
-            title: 'Fecha de venta', field: 'fecha',
-            
-            
-        },
-        { title: 'Detalles', field: 'detalles' },
-        {
-            title: 'Unidades',
-            field: 'unidades',
-            
-        },
-
-        {
-            title: 'Precio Unitario',
-            field: 'precioUnitario',
-            
-            
-        },
-        
-        {
-            title: 'Valor Total',
-            field: 'valorTotal',
-            
-        },
-       
-        {
-            title: 'Identificación',
-            field: 'identificacion',
-            
-        },
-        {
-            title: 'Comprador',
-            field: 'comprador',
-            
-        },
-        {
-            title: 'Vendedor',
-            field: 'vendedor',
-            
-        },
-    ]);
-
     const [data, setData] = useState([]);
+    const [data_vendor, setVendorData] = useState([]);
 
     useEffect(() => {
+        async function getVendorUsers() {
+            const response = await fetch('http://localhost:3002/api/users/vendors');
+            const response_total = await response.json();
+            const data_vendor = {}
+            response_total.map(row => data_vendor[row._id] = row.name)
+            setVendorData(data_vendor);
+        }
+        getVendorUsers();
 
         async function fetchData() {
             const response = await callApi();
@@ -101,6 +62,56 @@ function GestionDeVentas(props) {
         fetchData();
     }, []);
 
+    const columns = [
+
+        {
+            title: 'ID', field: '_id', hidden: true,
+        },
+        {
+            title: 'Número de Registro', field: 'registro'
+        },
+        {
+            title: 'Fecha de venta', field: 'fecha',
+
+
+        },
+        { title: 'Detalles', field: 'detalles' },
+        {
+            title: 'Unidades',
+            field: 'unidades',
+
+        },
+
+        {
+            title: 'Precio Unitario',
+            field: 'precioUnitario',
+
+
+        },
+
+        {
+            title: 'Valor Total',
+            field: 'valorTotal',
+
+        },
+
+        {
+            title: 'Identificación',
+            field: 'identificacion',
+
+        },
+        {
+            title: 'Comprador',
+            field: 'comprador',
+
+        },
+        {
+            title: 'Vendedor',
+            field: 'vendedor',
+            lookup: data_vendor
+
+        },
+    ];
 
     return (
         <MaterialTable

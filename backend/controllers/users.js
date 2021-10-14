@@ -6,6 +6,12 @@ exports.getUsers = (req, res) => {
     });
 };
 
+exports.getVendorUsers = (req, res) => {
+    Usuario.find().where('role').equals('vendedor').then((usuarioResult) => {
+        res.status(200).json(usuarioResult);
+    });
+};
+
 exports.addUser = (req, res) => {
     const UsuarioAdd = new Usuario({
         identification: req.body.identification,

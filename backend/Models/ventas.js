@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var Usuario = mongoose.model('Usuario');
 
 const venta = mongoose.Schema({
     registro: { type: Number, required: true },
@@ -9,11 +11,10 @@ const venta = mongoose.Schema({
     fecha: { type: Date, required: true },
     identificacion: { type: Number, required: true },
     comprador: { type: String, required: true },
-    vendedor: { type: String, required: true }
+    vendedor: { type: Schema.ObjectId, ref: "Usuario" }
 });
 module.exports = mongoose.model("Venta", venta);
 
-        
-        
-        
-        
+
+
+
