@@ -17,7 +17,8 @@ import Header from './Shared/Header';
 function App() {
   return (
     <Router>
-      <Header/>
+      <Header />
+      
       <Switch>
         <Route path="/" exact>
           <LoginForm />
