@@ -1,33 +1,43 @@
-import React from "react";
-import Button from 'react-bootstrap/Button'
-import ChocoApp from './ChocoApp.png'
-import log from './log.png'
-import './Login.css'
+import React from 'react';
+import "./Login.css";
+import ChocoApp2 from './ChocoApp2.png';
+import fondo from './fondo.png';
+import {GoogleLogin} from 'react-google-login';
+
+
 const loginForm=()=>{
-    return(
+    return (
         <form>
-            <div className='logoApp'>
-             <img src={ChocoApp}  />
-            </div>       
-            <div className='form-inner'>
-                <div className='logoapp'>
-                    <img src={log}  />
+            <div class="contenedor">
+                <div class="centered">
+                    <img src={ChocoApp2}/>
                 </div>
-                <div className='form-group'>
-                    <label htmlFor='label'> E-mail  </label>
-                    <input classname="input" type='email' placeholder='Ingrese su correo electrónico'/>
+                <div class="ingreso">
+                    <GoogleLogin
+                        clientId='23199630294-vhvoq6u3t3fh31oa1on95ionv308n62v.apps.googleusercontent.com'
+                        buttonText="Iniciar sesión"
+                        onSuccess={login}
+                        onFailure={loginError}
+                        cookiePolicy={"single-host-origin"}
+                    />
                 </div>
-                <div className='form-group'>
-                    <label htmlFor='label'> Contraseña</label>
-                    <input className="input" type='password' placeholder='Ingrese su contraseña'/>
-                </div>              
-                <div className="form-group">
-                <label htmlFor='label'></label>
-                <button type="button" id="ingresar" class="btn btn-outline-primary">Ingresar</button>
-                <button type="button" id="crearCuenta" class="btn btn-outline-primary">Crear Cuenta</button>
-                </div> 
-            </div>
+                
+                <div className="contenedor2">
+                    
+                    <div class="back">
+                        <img src={fondo}/>
+                    </div>
+                </div>
+                
+            </div>    
         </form>
     )
+}
+const loginError=()=>{
+
+}
+const login=()=>{
+    
+
 }
 export default loginForm;
