@@ -6,6 +6,13 @@ exports.getProducts = (req, res) => {
   });
 };
 
+exports.getAvaliableProducts = (req, res) => {
+  Producto.find().where('estado').equals('Disponible').then((productoResult) => {
+      res.status(200).json(productoResult);
+  });
+};
+
+
 exports.addProduct = (req, res) => {
   console.log('Hola');
   const productoAdd = new Producto({

@@ -44,6 +44,7 @@ function GestionDeVentas(props) {
     const { useState } = React;
     const [data, setData] = useState([]);
     const [data_vendor, setVendorData] = useState([]);
+    const [data_product, setProductData] = useState([]);
 
     useEffect(() => {
         async function getVendorUsers() {
@@ -54,6 +55,15 @@ function GestionDeVentas(props) {
             setVendorData(data_vendor);
         }
         getVendorUsers();
+
+        async function getAvaliableProducts() {
+            const response = await fetch('http://localhost:3002/api/products/availables');
+            const response_total = await response.json();
+            const data_product = {}
+            response_total.map(row => data_product[row._id] = row.producto)
+            setProductData(data_product);
+        }
+        getAvaliableProducts();
 
         async function fetchData() {
             const response = await callApi();
@@ -75,10 +85,11 @@ function GestionDeVentas(props) {
 
 
         },
-        { title: 'Detalles', field: 'detalles' },
+        { title: 'Detalles', field: 'detalles', lookup: data_product },
         {
             title: 'Unidades',
             field: 'unidades',
+
 
         },
 
