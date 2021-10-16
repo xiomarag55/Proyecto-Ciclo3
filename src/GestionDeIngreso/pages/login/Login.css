@@ -1,4 +1,6 @@
- 
+ body{
+     background-color:  rgb(15,46,92);
+ }
 .contenedor {
     height: 100%;
     width: 100%;
