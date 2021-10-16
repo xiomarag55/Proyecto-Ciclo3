@@ -60,7 +60,7 @@ function DataTableComponent(props) {
         {
             title: 'Rol',
             field: 'role',
-            lookup: { "administrador": 'Administrador', "vendedor": 'Vendedor' },
+            lookup: { "Administrador": 'Administrador', "Vendedor": 'Vendedor' },
         },
         {
             title: 'Estado',
@@ -135,7 +135,6 @@ function DataTableComponent(props) {
 
                         postData('http://localhost:3002/api/users')
                             .then(dataALL => {
-                                console.log(dataALL);
                                 setData([...data, newData]);
                                 resolve();
                             });
@@ -159,7 +158,6 @@ function DataTableComponent(props) {
                         }
                         postData('http://localhost:3002/api/users/' + newData._id)
                             .then(dataALL => {
-                                console.log(dataALL);
                                 const dataUpdate = [...data];
                                 const index = oldData.tableData.id;
                                 dataUpdate[index] = newData;
@@ -186,7 +184,6 @@ function DataTableComponent(props) {
                         }
                         postData('http://localhost:3002/api/users/' + oldData._id)
                             .then(dataALL => {
-                                console.log(dataALL);
                                 const dataDelete = [...data];
                                 const index = oldData.tableData.id;
                                 dataDelete.splice(index, 1);

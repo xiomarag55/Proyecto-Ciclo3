@@ -181,7 +181,6 @@ function GestionDeVentas(props) {
 
                         postData('http://localhost:3002/api/sales')
                             .then(dataALL => {
-                                console.log(dataALL);
                                 setData([...data, newData]);
                                 resolve();
                             });
@@ -205,7 +204,6 @@ function GestionDeVentas(props) {
                         }
                         postData('http://localhost:3002/api/sales/' + newData._id)
                             .then(dataALL => {
-                                console.log(dataALL);
                                 const dataUpdate = [...data];
                                 const index = oldData.tableData.id;
                                 dataUpdate[index] = newData;
@@ -232,7 +230,6 @@ function GestionDeVentas(props) {
                         }
                         postData('http://localhost:3002/api/sales/' + oldData._id)
                             .then(dataALL => {
-                                console.log(dataALL);
                                 const dataDelete = [...data];
                                 const index = oldData.tableData.id;
                                 dataDelete.splice(index, 1);
