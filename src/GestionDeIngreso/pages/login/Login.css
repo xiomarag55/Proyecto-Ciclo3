@@ -1,16 +1,10 @@
-body{
-    margin: 20px;
-    line-height: 1em;
-    font-size: 0.875em;
-    background:rgb(31,68,105);
-    
-}  
+ 
 .contenedor {
     height: 100%;
     width: 100%;
     position: fixed;
     z-index: 1;
-    top: 12%;
+    top: 0%;
     overflow-x: hidden;
     padding-top: 20px;
     background-color: rgb(82,143,204);
@@ -19,9 +13,9 @@ body{
 }
 .ingreso{
     position: fixed;
-    top: 65%;
-    overflow-x: hidden; 
+    top: 55%;
     left: 14%;
+    border: radius 10px;
 
 }
 .contenedor2 {
@@ -35,6 +29,7 @@ body{
     background-color: rgb(15,46,92);
     left: 40%;
     display:flex;
+    top:0%;
 }
 .centered{
     position: absolute;
