@@ -14,7 +14,7 @@ exports.getVendorUsers = (req, res) => {
 
 exports.addUser = (req, res) => {
     const UsuarioAdd = new Usuario({
-        identification: req.body.identification,
+        email: req.body.email,
         name: req.body.name,
         role: req.body.role,
         status: req.body.status,

@@ -47,10 +47,10 @@ function DataTableComponent(props) {
             title: 'ID', field: '_id', hidden: true,
         },
         {
-            title: 'Identificacion', field: 'identification',
+            title: 'Email', field: 'email',
             editComponent: props => (
                 <input
-                    type="number"
+                    type="text"
                     value={props.value}
                     onChange={e => props.onChange(e.target.value)}
                 />
