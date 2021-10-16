@@ -7,7 +7,6 @@ exports.getSales = (req, res) => {
 };
 
 exports.addSale = (req, res) => {
-  console.log("Hola");
   const ventaAdd = new Venta({
     unidades: req.body.unidades,
     precioUnitario: req.body.precioUnitario,
@@ -18,11 +17,9 @@ exports.addSale = (req, res) => {
     vendedor: req.body.vendedor,
     registro: req.body.registro,
     detalles: req.body.detalles,
-
   });
 
   ventaAdd.save().then((createdSale) => {
-    console.log(createdSale);
     res.status(201).json("Creado satisfactoriamente");
   });
 };

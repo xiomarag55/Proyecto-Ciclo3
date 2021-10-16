@@ -1,15 +1,17 @@
 import React from "react";
-import "./Login.css";
-import ChocoApp2 from "./ChocoApp2.png";
-import fondo from "./fondo.png";
+import "../styles/Login.css";
+import ChocoApp2 from "../img/ChocoApp2.png";
+import fondo from "../img/fondo.png";
 import GoogleLogin from "react-google-login";
+
+import loginUsuario from "./ValidationLogin";
 
 const loginForm = () => {
   const login = (res) => {
-    console.log(res);
+    loginUsuario(res);
   };
   const loginError = (res) => {
-    console.log(res);
+    window.location.href = "/";
   };
   return (
     <>

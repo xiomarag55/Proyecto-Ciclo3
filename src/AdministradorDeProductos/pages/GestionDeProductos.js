@@ -46,7 +46,7 @@ const tableIcons = {
 
 function GestionDeProductos(props) {
   const { useState } = React;
-  const [columns, setColumns] = useState([
+  const [columns] = useState([
     {
       title: "ID",
       field: "_id",
@@ -145,7 +145,6 @@ function GestionDeProductos(props) {
               }
 
               postData("http://localhost:3002/api/products").then((dataALL) => {
-                console.log(dataALL);
                 setData([...data, newData]);
                 resolve();
               });
@@ -170,7 +169,6 @@ function GestionDeProductos(props) {
               postData(
                 "http://localhost:3002/api/products/" + newData._id
               ).then((dataALL) => {
-                console.log(dataALL);
                 const dataUpdate = [...data];
                 const index = oldData.tableData.id;
                 dataUpdate[index] = newData;
@@ -197,7 +195,6 @@ function GestionDeProductos(props) {
               postData(
                 "http://localhost:3002/api/products/" + oldData._id
               ).then((dataALL) => {
-                console.log(dataALL);
                 const dataDelete = [...data];
                 const index = oldData.tableData.id;
                 dataDelete.splice(index, 1);

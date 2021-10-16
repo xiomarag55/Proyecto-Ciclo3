@@ -8,7 +8,7 @@ const usersRoutes = require("./routes/users");
 const salesRoutes = require("./routes/sales");
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 mongoose
   .connect(
