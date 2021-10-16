@@ -90,6 +90,8 @@ function GestionDeProductos(props) {
 
   return (
     
+    <>
+    <Header />
 
       <MaterialTable
         title="Listas de Productos"
@@ -206,6 +208,7 @@ function GestionDeProductos(props) {
             }),
         }}
       />
+      </>
     
   );
 }

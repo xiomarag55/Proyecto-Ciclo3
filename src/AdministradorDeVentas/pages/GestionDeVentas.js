@@ -18,6 +18,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import callApi from '../api';
 import { useEffect } from 'react';
+import Header from "../../Shared/Header";
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -125,6 +126,8 @@ function GestionDeVentas(props) {
     ];
 
     return (
+        <>
+        <Header />
         <MaterialTable
             title="Ventas"
             columns={columns}
@@ -240,6 +243,7 @@ function GestionDeVentas(props) {
                     }),
             }}
         />
+        </>
     )
 }
 export default GestionDeVentas;

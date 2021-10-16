@@ -1,5 +1,3 @@
-
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import{ 
@@ -17,7 +15,7 @@ import Header from './Shared/Header';
 function App() {
   return (
     <Router>
-      <Header />
+      
       
       <Switch>
         <Route path="/" exact>

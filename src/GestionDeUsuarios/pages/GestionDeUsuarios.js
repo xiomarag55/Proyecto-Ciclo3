@@ -1,11 +1,13 @@
-
 import Card from 'react-bootstrap/Card'
 // import NavComponent from './Components/NavComponent';
 import ModalComponent from './Components/ModalComponent';
 import DataTableComponent from './Components/DataTableComponent';
+import Header from "../../Shared/Header";
 
 const GestionDeUsuarios = () => {
   return (
+    <>
+    <Header />
     <div>
       {/* <NavComponent /> */}
       <Card>
@@ -16,6 +18,7 @@ const GestionDeUsuarios = () => {
       </Card>
 
     </div>
+    </>
   );
 };
 
