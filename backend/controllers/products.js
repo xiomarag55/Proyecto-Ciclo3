@@ -9,7 +9,7 @@ exports.getProducts = (req, res) => {
 exports.getAvaliableProducts = (req, res) => {
   Producto.find()
     .where("estado")
-    .equals("Disponible")
+    .equals("disponible")
     .then((productoResult) => {
       res.status(200).json(productoResult);
     });

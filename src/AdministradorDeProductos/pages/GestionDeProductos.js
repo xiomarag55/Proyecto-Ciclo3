@@ -50,7 +50,8 @@ function GestionDeProductos(props) {
     {
       title: "ID",
       field: "_id",
-      hidden: true,
+      //hidden: true,
+      editable:'never',
     },
     {
       title: "Producto",

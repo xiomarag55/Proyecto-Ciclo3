@@ -41,7 +41,7 @@ exports.getUsers = (req, res) => {
 exports.getVendorUsers = (req, res) => {
   Usuario.find()
     .where("role")
-    .equals("Vendedor")
+    .equals("vendedor")
     .then((usuarioResult) => {
       res.status(200).json(usuarioResult);
     });

@@ -47,7 +47,7 @@ function DataTableComponent(props) {
             title: 'ID', field: '_id', hidden: true,
         },
         {
-            title: 'Email', field: 'email',
+            title: 'Email', field: 'email', editable:'never',
             editComponent: props => (
                 <input
                     type="text"
@@ -56,11 +56,11 @@ function DataTableComponent(props) {
                 />
             )
         },
-        { title: 'Nombre', field: 'name' },
+        { title: 'Nombre', field: 'name',},
         {
             title: 'Rol',
             field: 'role',
-            lookup: { "Administrador": 'Administrador', "Vendedor": 'Vendedor' },
+            lookup: { "administrador": 'Administrador', "vendedor": 'Vendedor' },
         },
         {
             title: 'Estado',
@@ -135,6 +135,7 @@ function DataTableComponent(props) {
 
                         postData('http://localhost:3002/api/users')
                             .then(dataALL => {
+                                console.log(dataALL);
                                 setData([...data, newData]);
                                 resolve();
                             });
@@ -158,6 +159,7 @@ function DataTableComponent(props) {
                         }
                         postData('http://localhost:3002/api/users/' + newData._id)
                             .then(dataALL => {
+                                console.log(dataALL);
                                 const dataUpdate = [...data];
                                 const index = oldData.tableData.id;
                                 dataUpdate[index] = newData;
@@ -184,6 +186,7 @@ function DataTableComponent(props) {
                         }
                         postData('http://localhost:3002/api/users/' + oldData._id)
                             .then(dataALL => {
+                                console.log(dataALL);
                                 const dataDelete = [...data];
                                 const index = oldData.tableData.id;
                                 dataDelete.splice(index, 1);
