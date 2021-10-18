@@ -47,15 +47,20 @@ exports.getVendorUsers = (req, res) => {
     });
 };
 
-exports.updateUser = async (req, res) => {
-  try {
-    const usuario = await Usuario.findById(req.params.id);
-    Object.assign(usuario, req.body);
-    res.send({ data: usuario });
-    usuario.save();
-  } catch {
-    res.status(404).send({ error: "No se encuentra el usuario" });
-  }
+exports.updateUser = (req, res) => {
+  const id = req.params.id;
+  const userUpdate = new Usuario({
+    
+    _id: id,
+    role: req.body.role,
+    status: req.body.status,
+    
+  });
+  console.log(userUpdate);
+
+  Usuario.findByIdAndUpdate(id, userUpdate).then((usuarioResult) => {
+    res.status(200).json("El usuario se actualizó satisfactoriamente");
+  });
 };
 exports.deleteUser = (req, res) => {
   Usuario.findByIdAndRemove(req.params.id)

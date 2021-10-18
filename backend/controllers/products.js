@@ -30,15 +30,25 @@ exports.addProduct = (req, res) => {
   });
 };
 
-exports.updateProduct = async (req, res) => {
-  try {
-    const producto = await Producto.findById(req.params.id);
-    Object.assign(producto, req.body);
-    res.send({ data: producto });
-    producto.save();
-  } catch {
-    res.status(404).send({ error: "No se encuentra el producto" });
-  }
+exports.updateProduct = (req, res) => {
+  const id = req.params.id;
+  const productUpdate = new Producto({
+    
+    _id: id,
+    producto: req.body.role,
+    unidades: req.body.unidades,
+    precioUnitario: req.body.precioUnitario,
+    valorTotal: req.body.valorTotal,
+    fecha: req.body.fecha,
+    estado: req.body.estado,
+    
+    
+  });
+  console.log(productUpdate);
+
+  Producto.findByIdAndUpdate(id, productUpdate).then((productoResult) => {
+    res.status(200).json("El producto se actualizó satisfactoriamente");
+  });
 };
 exports.deleteProduct = async (req, res) => {
   try {
@@ -47,7 +57,7 @@ exports.deleteProduct = async (req, res) => {
     res.send({ data: true });
     producto.save();
   } catch {
-    res.status(404).send({ error: "No se encuentra el producto" });
+    res.status(404).send({ error: "Producto no encontrado" });
   }
 };
 exports.getProductId = (req, res) => {

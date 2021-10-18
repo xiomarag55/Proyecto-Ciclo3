@@ -4,7 +4,7 @@ var Usuario = mongoose.model("Usuario");
 var Producto = mongoose.model("Producto");
 
 const venta = mongoose.Schema({
-  registro: { type: Number, required: true },
+  //registro: { type: Number, required: true },
   detalles: { type: Schema.Types.ObjectId, ref: "Producto" },
   //detalles: { type: String, required: true },
   unidades: { type: Number, required: true },

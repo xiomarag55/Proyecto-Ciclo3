@@ -5,7 +5,7 @@ const producto = mongoose.Schema({
     unidades: { type: Number, required: true },
     precioUnitario: { type: Number, required: true },
     valorTotal: { type: Number, required: true },
-    fecha: { type: Date, required: true },
+    fecha: { type: Date, required: true},
     estado: { type: String, required: true },
   });
   module.exports = mongoose.model("Producto", producto);

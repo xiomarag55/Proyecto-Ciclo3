@@ -24,15 +24,27 @@ exports.addSale = (req, res) => {
   });
 };
 
-exports.updateSale = async (req, res) => {
-  try {
-    const venta = await Venta.findById(req.params.id);
-    Object.assign(venta, req.body);
-    res.send({ data: venta });
-    venta.save();
-  } catch {
-    res.status(404).send({ error: "No se encuentra la venta" });
-  }
+exports.updateSale =  (req, res) => {
+  const id = req.params.id;
+  const saleUpdate = new Venta({
+    
+    _id: id,
+    detalles: req.body.detalles,
+    unidades: req.body.unidades,
+    precioUnitario: req.body.precioUnitario,
+    valorTotal: req.body.valorTotal,
+    fecha: req.body.fecha,
+    identificacion: req.body.identificacion,
+    comprador: req.body.comprador,
+    vendedor: req.body.vendedor,
+    
+    
+  });
+  console.log(saleUpdate);
+
+  Venta.findByIdAndUpdate(id, saleUpdate).then((ventaResult) => {
+    res.status(200).json("La venta se actualizó satisfactoriamente");
+  });
 };
 
 exports.deleteSale = async (req, res) => {
