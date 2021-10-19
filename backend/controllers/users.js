@@ -2,10 +2,15 @@ const Usuario = require("../models/users");
 
 exports.existUsuario = (req, res) => {
   Usuario.find()
-    .where("googleId")
-    .equals(req.body.googleId)
+    .where("email")
+    .equals(req.body.email)
     .then((usuarioResult) => {
-      res.status(200).json({ status: 0, response: usuarioResult });
+      if (usuarioResult.length > 0) {
+        
+        res.status(200).json({ status: 0, response: usuarioResult });
+      } else {
+        res.status(200).json({ status: 1, error: "Not found User" });
+      }
     })
     .catch((err) => {
       res.status(200).json({ status: 1, error: "Not found User" });
@@ -23,9 +28,8 @@ exports.addUser = (req, res) => {
 
   UsuarioAdd.save()
     .then((createdUser) => {
-      res
-        .status(201)
-        .json({ status: 1, response: "Creado satisfactoriamente" });
+      console.log(createdUser);
+      res.status(201).json({ status: 0, response: createdUser });
     })
     .catch((err) => {
       res.status(200).json({ status: 1, error: err });
@@ -50,11 +54,9 @@ exports.getVendorUsers = (req, res) => {
 exports.updateUser = (req, res) => {
   const id = req.params.id;
   const userUpdate = new Usuario({
-    
     _id: id,
     role: req.body.role,
     status: req.body.status,
-    
   });
   console.log(userUpdate);
 
