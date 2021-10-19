@@ -30,9 +30,9 @@ const validationLogin = async (login) => {
 };
 
 const redirect = (role) => {
-  if (role === "Administrador") {
+  if (role === "administrador") {
     window.location.href = "/GestionDeUsuarios";
-  } else if (role === "Vendedor") {
+  } else if (role === "vendedor") {
     window.location.href = "/administradordeventas";
   } else {
     window.location.href = "/";
