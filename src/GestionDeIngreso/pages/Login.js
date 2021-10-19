@@ -4,15 +4,7 @@ import ChocoApp2 from "../img/ChocoApp2.png";
 import fondo from "../img/fondo.png";
 import GoogleLogin from "react-google-login";
 
-import loginUsuario from "./ValidationLogin";
-
-const loginForm = () => {
-  const login = (res) => {
-    loginUsuario(res);
-  };
-  const loginError = (res) => {
-    window.location.href = "/";
-  };
+const loginForm = ({ login, logout }) => {
   return (
     <>
       <form>
@@ -25,7 +17,7 @@ const loginForm = () => {
               clientId="23199630294-vhvoq6u3t3fh31oa1on95ionv308n62v.apps.googleusercontent.com"
               buttonText="Iniciar sesión"
               onSuccess={login}
-              onFailure={loginError}
+              onFailure={logout}
               cookiePolicy={"single_host_origin"}
             />
           </div>

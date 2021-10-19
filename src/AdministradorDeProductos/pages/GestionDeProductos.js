@@ -51,7 +51,7 @@ function GestionDeProductos(props) {
       title: "ID",
       field: "_id",
       //hidden: true,
-      editable:'never',
+      editable: "never",
     },
     {
       title: "Producto",
@@ -90,10 +90,7 @@ function GestionDeProductos(props) {
   }, []);
 
   return (
-    
     <>
-    <Header />
-
       <MaterialTable
         title="Listas de Productos"
         columns={columns}
@@ -206,8 +203,7 @@ function GestionDeProductos(props) {
             }),
         }}
       />
-      </>
-    
+    </>
   );
 }
 export default GestionDeProductos;

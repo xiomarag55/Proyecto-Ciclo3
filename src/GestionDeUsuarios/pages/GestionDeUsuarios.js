@@ -5,7 +5,6 @@ import Header from "../../Shared/Header";
 const GestionDeUsuarios = () => {
   return (
     <>
-    <Header />
     <div>
       {/* <NavComponent /> */}
       <Card>

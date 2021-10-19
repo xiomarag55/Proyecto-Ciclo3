@@ -11,12 +11,12 @@ const validationLogin = async (login) => {
   );
 
   if (response.status === 0) {
-    redirect(response.response[0].role);
+    return [true, response.response[0].role];
   } else if (response.status === 1) {
     const data = {
       email: login.it.Tt,
       name: login.it.Se,
-      role: "Vendedor",
+      role: "vendedor",
       status: "Pendiente",
       googleId: login.it.sT,
     };
@@ -25,17 +25,10 @@ const validationLogin = async (login) => {
       data
     );
 
-    redirect(response.response[0].role);
+    return [true, response.response[0].role];
+  } else {
+    return [false, null];
   }
 };
 
-const redirect = (role) => {
-  if (role === "administrador") {
-    window.location.href = "/GestionDeUsuarios";
-  } else if (role === "vendedor") {
-    window.location.href = "/administradordeventas";
-  } else {
-    window.location.href = "/";
-  }
-};
 export default validationLogin;
