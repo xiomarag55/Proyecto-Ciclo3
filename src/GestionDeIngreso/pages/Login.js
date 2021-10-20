@@ -8,18 +8,21 @@ const loginForm = ({ login, logout }) => {
   return (
     <>
       <form>
-        <div class="contenedor">
-          <div class="centered">
+        <div className="contenedor">
+          <div className="centered">
             <img src={ChocoApp2} />
           </div>
-          <div class="ingreso">
-            <GoogleLogin
+          <div className="ingreso">
+            
+         
+            <GoogleLogin className="googlebutton"
               clientId="23199630294-vhvoq6u3t3fh31oa1on95ionv308n62v.apps.googleusercontent.com"
               buttonText="Iniciar sesión"
               onSuccess={login}
               onFailure={logout}
               cookiePolicy={"single_host_origin"}
             />
+         
           </div>
 
           <div className="contenedor2">
