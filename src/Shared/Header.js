@@ -1,12 +1,11 @@
 import { Button, Navbar, Nav, Container } from "react-bootstrap";
 
 const Header = ({ logout, role }) => {
-  console.log("Este es: " + role);
   return (
     <div>
       <Navbar className="Navbar">
         <Container fluid>
-          <Navbar.Brand className="text-white" href="/">
+          <Navbar.Brand className="text-white">
             ChocoApp
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
