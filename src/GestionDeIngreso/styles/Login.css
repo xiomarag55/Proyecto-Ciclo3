@@ -1,0 +1,54 @@
+body{
+    background-color:  rgb(15,46,92);
+}
+.contenedor {
+   height: 100%;
+   width: 35%;
+   position: fixed;
+   z-index: 1;
+   overflow-x: hidden;
+   padding-top: 20px;
+   background-color: rgb(82,143,204);
+   display:flex;
+}
+.ingreso{
+   position: fixed;
+   top: 50%;
+   left: 13%;
+   
+}
+
+.contenedor2 {
+   height: 100%;
+   width: 65%;
+   position: fixed;
+   z-index: 1;
+   overflow-x: hidden;
+   padding-top: 20px;
+   background-color: rgb(15,46,92);
+   left: 60%;
+   display:flex;
+   
+}
+.centered{
+   
+   width: 35vw;
+   height: 40vh;
+   
+}
+.centered img {
+   width: 100%;
+   height: 155%;
+   
+     
+}
+.back{
+   width: 100vw;
+   height: 100vh;
+   
+     
+}
+.back img {
+   width: 65%;
+   height: 100%;
+}
