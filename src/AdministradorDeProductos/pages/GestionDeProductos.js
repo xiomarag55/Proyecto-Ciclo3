@@ -18,7 +18,6 @@ import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import callApi from "../api";
 import { useEffect } from "react";
-import Header from "../../Shared/Header";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),

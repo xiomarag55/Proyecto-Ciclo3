@@ -5,7 +5,6 @@ const usuario = mongoose.Schema({
   name: { type: String, required: true },
   role: { type: String, required: true },
   status: { type: String, required: true },
-  googleId: { type: Number },
 });
 
 module.exports = mongoose.model("Usuario", usuario);

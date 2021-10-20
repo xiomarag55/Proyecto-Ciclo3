@@ -1,20 +1,14 @@
-import Card from 'react-bootstrap/Card'
-import DataTableComponent from './Components/DataTableComponent';
-import Header from "../../Shared/Header";
+import Card from "react-bootstrap/Card";
+import DataTableComponent from "./Components/DataTableComponent";
 
 const GestionDeUsuarios = () => {
   return (
     <>
-    <div>
-      {/* <NavComponent /> */}
       <Card>
-        <Card.Body  >
-          {/* <ModalComponent /> */}
+        <Card.Body>
           <DataTableComponent />
         </Card.Body>
       </Card>
-
-    </div>
     </>
   );
 };

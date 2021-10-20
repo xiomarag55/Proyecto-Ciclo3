@@ -23,7 +23,6 @@ exports.addUser = (req, res) => {
     name: req.body.name,
     role: req.body.role,
     status: req.body.status,
-    googleId: req.body.googleId,
   });
 
   UsuarioAdd.save()

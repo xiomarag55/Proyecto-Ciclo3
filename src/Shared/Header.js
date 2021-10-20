@@ -1,6 +1,7 @@
 import { Button, Navbar, Nav, Container } from "react-bootstrap";
 
-const Header = ({ logout }) => {
+const Header = ({ logout, role }) => {
+  console.log("Este es: " + role);
   return (
     <div>
       <Navbar className="Navbar">
@@ -11,17 +12,23 @@ const Header = ({ logout }) => {
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav className="me-auto my-2 my-lg-0">
-              <Nav.Link className="text-white" href="administradordeventas">
-                Administrador de Ventas
+              <Nav.Link className="text-white" href="/ventas">
+                Gestion Ventas
               </Nav.Link>
-              <Nav.Link className="text-white" href="administradordeproductos">
-                Administrador de Productos
-              </Nav.Link>
-              <Nav.Link className="text-white" href="GestionDeUsuarios">
-                Administrador de Usuarios{" "}
-              </Nav.Link>
+              {role === "administrador" && (
+                <>
+                  <Nav.Link className="text-white" href="/productos">
+                    Administrador de Productos
+                  </Nav.Link>
+                  <Nav.Link className="text-white" href="/usuarios">
+                    Administrador de Usuarios
+                  </Nav.Link>
+                </>
+              )}
             </Nav>
-            <Button variant="outline-info" onClick={logout}>Logout</Button>
+            <Button variant="outline-info" onClick={logout}>
+              Logout
+            </Button>
           </Navbar.Collapse>
         </Container>
       </Navbar>

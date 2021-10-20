@@ -1,31 +1,30 @@
+import jwtDecode from "jwt-decode";
 import restFetchs from "../../Utils/CustomFetch";
 
 const validationLogin = async (login) => {
-  const data = {
-    googleId: login.it.sT,
-    email: login.it.Tt,
-  };
+  const token = jwtDecode(login.tokenId);
+
   const response = await restFetchs.fetchs.postFetch(
     "http://localhost:3002/api/users/login",
-    data
+    { email: token.email }
   );
 
   if (response.status === 0) {
     return [true, response.response[0].role];
   } else if (response.status === 1) {
     const data = {
-      email: login.it.Tt,
-      name: login.it.Se,
+      email: token.email,
+      name: token.name,
       role: "vendedor",
       status: "Pendiente",
-      googleId: login.it.sT,
     };
+
     const response = await restFetchs.fetchs.postFetch(
       "http://localhost:3002/api/users",
       data
     );
 
-    return [true, response.response[0].role];
+    return [true, response.response.role];
   } else {
     return [false, null];
   }
