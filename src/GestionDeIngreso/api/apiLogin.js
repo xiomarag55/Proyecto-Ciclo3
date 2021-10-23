@@ -6,7 +6,7 @@ const validationLogin = async (login) => {
     email: login.it.Tt,
   };
   return await restFetchs.fetchs.postFetch(
-    "https://chocoapp-back.herokuapp.com/api/users/login",
+    process.env.REACT_APP_BACKEND_URL + "users/login",
     data
   );
 };
@@ -20,7 +20,7 @@ const saveUsuarioLogin = async (login) => {
     googleId: login.it.sT,
   };
   return await restFetchs.fetchs.postFetch(
-    "https://chocoapp-back.herokuapp.com/api/users",
+    process.env.REACT_APP_BACKEND_URL + "users",
     data
   );
 };
@@ -28,7 +28,7 @@ const saveUsuarioLogin = async (login) => {
 const ApiLogin = {
   async validarLogin(login) {
     const data = await validationLogin(login);
-        return data.json;
+    return data.json;
   },
   saveLogin(login) {
     return saveUsuarioLogin(login);

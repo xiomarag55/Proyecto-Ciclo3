@@ -5,7 +5,7 @@ const validationLogin = async (login) => {
   const token = jwtDecode(login.tokenId);
 
   const response = await restFetchs.fetchs.postFetch(
-    "http://localhost:3002/api/users/login",
+    process.env.REACT_APP_BACKEND_URL + "users/login",
     { email: token.email }
   );
 
@@ -20,7 +20,7 @@ const validationLogin = async (login) => {
     };
 
     const response = await restFetchs.fetchs.postFetch(
-      "http://localhost:3002/api/users",
+      process.env.REACT_APP_BACKEND_URL + "users",
       data
     );
 

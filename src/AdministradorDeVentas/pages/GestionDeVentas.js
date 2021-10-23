@@ -50,7 +50,9 @@ function GestionDeVentas(props) {
 
   useEffect(() => {
     async function getVendorUsers() {
-      const response = await fetch("http://localhost:3002/api/users/vendors");
+      const response = await fetch(
+        process.env.REACT_APP_BACKEND_URL + "vendors"
+      );
       const response_total = await response.json();
       const data_vendor = {};
       response_total.map((row) => (data_vendor[row._id] = row.name));
@@ -60,7 +62,7 @@ function GestionDeVentas(props) {
 
     async function getAvaliableProducts() {
       const response = await fetch(
-        "http://localhost:3002/api/products/availables"
+        process.env.REACT_APP_BACKEND_URL + "availables"
       );
       const response_total = await response.json();
       const data_product = {};
@@ -174,10 +176,12 @@ function GestionDeVentas(props) {
                 return response.json();
               }
 
-              postData("http://localhost:3002/api/sales").then((dataALL) => {
-                setData([...data, newData]);
-                resolve();
-              });
+              postData(process.env.REACT_APP_BACKEND_URL + "sales").then(
+                (dataALL) => {
+                  setData([...data, newData]);
+                  resolve();
+                }
+              );
             }),
           onRowUpdate: (newData, oldData) =>
             new Promise((resolve, reject) => {
@@ -196,15 +200,15 @@ function GestionDeVentas(props) {
                 });
                 return response.json();
               }
-              postData("http://localhost:3002/api/sales/" + newData._id).then(
-                (dataALL) => {
-                  const dataUpdate = [...data];
-                  const index = oldData.tableData.id;
-                  dataUpdate[index] = newData;
-                  setData([...dataUpdate]);
-                  resolve();
-                }
-              );
+              postData(
+                process.env.REACT_APP_BACKEND_URL + "sales/" + newData._id
+              ).then((dataALL) => {
+                const dataUpdate = [...data];
+                const index = oldData.tableData.id;
+                dataUpdate[index] = newData;
+                setData([...dataUpdate]);
+                resolve();
+              });
             }),
           onRowDelete: (oldData) =>
             new Promise((resolve, reject) => {
@@ -222,16 +226,16 @@ function GestionDeVentas(props) {
                 });
                 return response.json();
               }
-              postData("http://localhost:3002/api/sales/" + oldData._id).then(
-                (dataALL) => {
-                  const dataDelete = [...data];
-                  const index = oldData.tableData.id;
-                  dataDelete.splice(index, 1);
-                  setData([...dataDelete]);
+              postData(
+                process.env.REACT_APP_BACKEND_URL + "sales/" + oldData._id
+              ).then((dataALL) => {
+                const dataDelete = [...data];
+                const index = oldData.tableData.id;
+                dataDelete.splice(index, 1);
+                setData([...dataDelete]);
 
-                  resolve();
-                }
-              );
+                resolve();
+              });
             }),
         }}
       />

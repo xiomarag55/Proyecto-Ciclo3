@@ -141,10 +141,12 @@ function GestionDeProductos(props) {
                 return response.json();
               }
 
-              postData("http://localhost:3002/api/products").then((dataALL) => {
-                setData([...data, newData]);
-                resolve();
-              });
+              postData(process.env.REACT_APP_BACKEND_URL + "products").then(
+                (dataALL) => {
+                  setData([...data, newData]);
+                  resolve();
+                }
+              );
             }),
           onRowUpdate: (newData, oldData) =>
             new Promise((resolve, reject) => {
@@ -164,7 +166,7 @@ function GestionDeProductos(props) {
                 return response.json();
               }
               postData(
-                "http://localhost:3002/api/products/" + newData._id
+                process.env.REACT_APP_BACKEND_URL + "products/" + newData._id
               ).then((dataALL) => {
                 const dataUpdate = [...data];
                 const index = oldData.tableData.id;
@@ -190,7 +192,7 @@ function GestionDeProductos(props) {
                 return response.json();
               }
               postData(
-                "http://localhost:3002/api/products/" + oldData._id
+                process.env.REACT_APP_BACKEND_URL + "products/" + oldData._id
               ).then((dataALL) => {
                 const dataDelete = [...data];
                 const index = oldData.tableData.id;
