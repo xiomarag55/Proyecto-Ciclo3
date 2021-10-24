@@ -51,24 +51,28 @@ function GestionDeVentas(props) {
   useEffect(() => {
     async function getVendorUsers() {
       const response = await fetch(
-        process.env.REACT_APP_BACKEND_URL + "vendors"
+        process.env.REACT_APP_BACKEND_URL + "users/vendors"
       );
       const response_total = await response.json();
       const data_vendor = {};
       response_total.map((row) => (data_vendor[row._id] = row.name));
       setVendorData(data_vendor);
     }
+
     getVendorUsers();
 
     async function getAvaliableProducts() {
       const response = await fetch(
-        process.env.REACT_APP_BACKEND_URL + "availables"
+        process.env.REACT_APP_BACKEND_URL + "products/availables"
       );
+      
       const response_total = await response.json();
       const data_product = {};
       response_total.map((row) => (data_product[row._id] = row.producto));
+
       setProductData(data_product);
     }
+
     getAvaliableProducts();
 
     async function fetchData() {
@@ -86,7 +90,7 @@ function GestionDeVentas(props) {
     },
     {
       title: "Número de Registro",
-      field: "registro",
+      field: "_id",
     },
     {
       title: "Fecha de venta",

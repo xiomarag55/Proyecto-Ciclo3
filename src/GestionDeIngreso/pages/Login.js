@@ -10,7 +10,7 @@ const loginForm = ({ login, logout }) => {
       <form>
         <div className="contenedor">
           <div className="centered">
-            <img src={ChocoApp2} />
+            <img alt="imagen1" src={ChocoApp2} />
           </div>
           <div className="ingreso">
             
@@ -27,7 +27,7 @@ const loginForm = ({ login, logout }) => {
 
           <div className="contenedor2">
             <div class="back">
-              <img src={fondo} />
+              <img alt="fondo" src={fondo} />
             </div>
           </div>
         </div>

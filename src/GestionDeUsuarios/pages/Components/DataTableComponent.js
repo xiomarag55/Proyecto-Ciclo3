@@ -45,7 +45,7 @@ const tableIcons = {
 
 function DataTableComponent(props) {
   const { useState } = React;
-  const [columns, setColumns] = useState([
+  const [columns] = useState([
     {
       title: "ID",
       field: "_id",
@@ -144,7 +144,6 @@ function DataTableComponent(props) {
 
             postData(process.env.REACT_APP_BACKEND_URL + "users").then(
               (dataALL) => {
-                console.log(dataALL);
                 setData([...data, newData]);
                 resolve();
               }
@@ -170,7 +169,6 @@ function DataTableComponent(props) {
             postData(
               process.env.REACT_APP_BACKEND_URL + "users/" + newData._id
             ).then((dataALL) => {
-              console.log(dataALL);
               const dataUpdate = [...data];
               const index = oldData.tableData.id;
               dataUpdate[index] = newData;
@@ -197,7 +195,6 @@ function DataTableComponent(props) {
             postData(
               process.env.REACT_APP_BACKEND_URL + "users/" + oldData._id
             ).then((dataALL) => {
-              console.log(dataALL);
               const dataDelete = [...data];
               const index = oldData.tableData.id;
               dataDelete.splice(index, 1);
